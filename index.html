@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nolwandle's Safe Space ❤️</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#f5f1f7;color:#3f3545;line-height:1.6}
+header{background:#8e7aa8;color:white;text-align:center;padding:35px 20px}
+header h1{font-size:35px;margin-bottom:8px}
+nav{background:white;padding:15px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+nav a{color:#6d587c;text-decoration:none;margin:0 12px;font-weight:bold}
+.container{width:90%;max-width:900px;margin:30px auto}
+.card{background:white;padding:25px;margin-bottom:25px;border-radius:18px;box-shadow:0 4px 15px rgba(0,0,0,.08)}
+.card h2{color:#735c83;margin-bottom:15px}
+.welcome{text-align:center}.welcome h2{font-size:28px}
+textarea{width:100%;height:180px;border:2px solid #ddd2e5;border-radius:12px;padding:15px;font-size:16px;resize:vertical;outline:none}
+button{background:#8e7aa8;color:white;border:none;padding:12px 20px;border-radius:10px;cursor:pointer;font-size:15px;margin-top:12px}
+button:hover{background:#735c83}
+.moods{display:flex;justify-content:center;gap:15px;flex-wrap:wrap}
+.mood{background:#f3edf6;border:2px solid transparent;padding:15px;border-radius:15px;cursor:pointer;font-size:25px}
+#moodMessage{text-align:center;margin-top:15px;font-weight:bold}
+.breathing{text-align:center}
+#breathingCircle{width:140px;height:140px;background:#bca8c8;border-radius:50%;margin:25px auto;display:flex;align-items:center;justify-content:center;color:white;font-weight:bold}
+.breathe{animation:breathe 8s infinite ease-in-out}
+@keyframes breathe{0%{transform:scale(1)}50%{transform:scale(1.5)}100%{transform:scale(1)}}
+.message{background:#fff3f7;border-left:5px solid #d58ba5;padding:20px;border-radius:10px;font-size:18px}
+.affirmation{text-align:center;font-size:21px;font-style:italic;padding:20px}
+.danger{background:#fff0f0;border-left:5px solid #d66}
+footer{text-align:center;padding:30px;color:#777}
+@media(max-width:600px){header h1{font-size:28px}nav a{display:inline-block;margin:5px}}
+</style>
+</head>
+<body>
+<header><h1>Nolwandle's Safe Space ❤️</h1><p>A little place to breathe, write and remember that you matter.</p></header>
+<nav><a href="#home">Home</a><a href="#journal">Journal</a><a href="#mood">Mood</a><a href="#breathe">Breathe</a><a href="#love">A Message</a></nav>
+<div class="container">
+<section id="home" class="card welcome"><h2>Welcome ❤️</h2><p>You don't have to have everything figured out today. Take things one moment at a time.</p><br><div class="message">You are allowed to have bad days. You are allowed to rest. You are allowed to ask for help. And most importantly, you are loved.</div></section>
+<section id="journal" class="card"><h2>📝 Your Journal</h2><p>Write whatever is on your mind. You don't have to make it perfect.</p><br><textarea id="journalText" placeholder="Write your thoughts here..."></textarea><br><button onclick="saveJournal()">Save My Thoughts</button> <button onclick="clearJournal()">Clear</button><p id="saveMessage"></p></section>
+<section id="mood" class="card"><h2>💭 How are you feeling?</h2><p>There is no right or wrong answer. Just choose what feels closest.</p><br><div class="moods">
+<button class="mood" onclick="chooseMood('Happy 😊')">😊</button>
+<button class="mood" onclick="chooseMood('Okay 🙂')">🙂</button>
+<button class="mood" onclick="chooseMood('Sad 😔')">😔</button>
+<button class="mood" onclick="chooseMood('Anxious 😰')">😰</button>
+<button class="mood" onclick="chooseMood('Angry 😡')">😡</button>
+<button class="mood" onclick="chooseMood('Tired 😴')">😴</button>
+</div><p id="moodMessage"></p></section>
+<section id="breathe" class="card breathing"><h2>🫁 Take a Breath</h2><p>Follow the circle and take a few slow breaths.</p><div id="breathingCircle">Breathe</div><button onclick="startBreathing()">Start Breathing</button><p id="breathingText"></p></section>
+<section class="card"><h2>✨ Today's Reminder</h2><div class="affirmation" id="affirmation">You are doing better than you think.</div><button onclick="newAffirmation()">Give Me Another</button></section>
+<section id="love" class="card"><h2>💌 A Message From Me</h2><div class="message"><p>I know some days are harder than others.</p><br><p>I want you to remember that you don't have to face everything by yourself.</p><br><p>You mean so much to me, and I will always want to see you happy, safe and okay.</p><br><p>Take your time. Breathe. Rest. Tomorrow is another day.</p><br><p>❤️ I love you.</p></div></section>
+<section class="card danger"><h2>❤️ If Things Feel Too Heavy</h2><p>You don't have to deal with overwhelming feelings completely by yourself.</p><br><p>Consider talking to someone you trust, a family member, friend, counsellor, psychologist, doctor, or another professional who can support you.</p><br><p>If you feel that you might hurt yourself or are in immediate danger, please seek emergency help or go to the nearest emergency department.</p></section>
+</div>
+<footer>Made with ❤️ for someone special.</footer>
+<script>
+function saveJournal(){let text=document.getElementById("journalText").value;if(text.trim()===""){document.getElementById("saveMessage").innerText="Write something before saving.";return}localStorage.setItem("journal",text);document.getElementById("saveMessage").innerText="Your thoughts have been saved ❤️"}
+function clearJournal(){document.getElementById("journalText").value="";localStorage.removeItem("journal");document.getElementById("saveMessage").innerText="Your journal has been cleared."}
+window.onload=function(){let savedJournal=localStorage.getItem("journal");if(savedJournal)document.getElementById("journalText").value=savedJournal}
+function chooseMood(mood){document.getElementById("moodMessage").innerText="You selected: "+mood+". Whatever you're feeling is okay. ❤️"}
+function startBreathing(){document.getElementById("breathingCircle").classList.add("breathe");document.getElementById("breathingText").innerText="Breathe in slowly... then breathe out slowly."}
+let affirmations=["You are stronger than you realise. ❤️","You don't have to solve everything today.","Your feelings are valid.","It is okay to take a break.","You deserve kindness, including from yourself.","One difficult day does not define your life.","You are loved more than you know.","Small steps are still progress.","You are allowed to ask for help.","Tomorrow gives you another chance."]
+function newAffirmation(){let randomNumber=Math.floor(Math.random()*affirmations.length);document.getElementById("affirmation").innerText=affirmations[randomNumber]}
+</script>
+</body>
+</html>
